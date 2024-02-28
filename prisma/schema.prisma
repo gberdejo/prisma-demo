@@ -1,0 +1,494 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model SequelizeMeta {
+  name String @id @unique(map: "name") @db.VarChar(255)
+}
+
+model call_center_relations {
+  id                 Int      @id @default(autoincrement())
+  call_center_origin Int
+  call_center_ssl    Int
+  createdAt          DateTime @db.DateTime(0)
+  updatedAt          DateTime @db.DateTime(0)
+}
+
+model distribution_counts {
+  id            Int      @id @default(autoincrement())
+  cod_origen    String   @db.VarChar(255)
+  count_dist_1  Int?     @default(0)
+  count_dist_2  Int?     @default(0)
+  count_dist_3  Int?     @default(0)
+  count_dist_4  Int?     @default(0)
+  count_dist_5  Int?     @default(0)
+  count_dist_6  Int?     @default(0)
+  count_dist_7  Int?     @default(0)
+  count_dist_8  Int?     @default(0)
+  count_dist_9  Int?     @default(0)
+  count_dist_10 Int?     @default(0)
+  createdAt     DateTime @db.DateTime(0)
+  updatedAt     DateTime @db.DateTime(0)
+}
+
+model leads {
+  id                        Int       @id @default(autoincrement())
+  form_id                   String?   @db.VarChar(255)
+  order_form_id             String?   @db.VarChar(255)
+  id_documento              String?   @db.VarChar(200)
+  nombre_completo           String?   @db.VarChar(255)
+  nombre                    String?   @db.VarChar(255)
+  ape_pat                   String?   @db.VarChar(255)
+  ape_mat                   String?   @db.VarChar(255)
+  tipo_doc                  String?   @db.VarChar(255)
+  num_doc                   String?   @db.VarChar(255)
+  num_tel_1                 String?   @db.VarChar(255)
+  num_tel_2                 String?   @db.VarChar(255)
+  fecha_orden               DateTime? @db.DateTime(0)
+  email                     String?   @db.VarChar(255)
+  departamento              String?   @db.VarChar(255)
+  provincia                 String?   @db.VarChar(255)
+  tipo_despacho             String?   @db.VarChar(255)
+  orden_id                  String?   @db.VarChar(255)
+  tipo_linea                String?   @db.VarChar(255)
+  modalidad                 String?   @db.VarChar(255)
+  distrito                  String?   @db.VarChar(255)
+  nom_equipo                String?   @db.VarChar(255)
+  precio                    String?   @db.VarChar(255)
+  cuota_inicial             String?   @db.VarChar(255)
+  precio_promocional        String?   @db.VarChar(255)
+  plan                      String?   @db.VarChar(255)
+  precio_plan               Int?
+  financiamiento            String?   @db.VarChar(255)
+  familia                   String?   @db.VarChar(255)
+  pi_id                     String?   @db.VarChar(255)
+  tipo_prod                 String?   @db.VarChar(255)
+  direccion                 String?   @db.VarChar(255)
+  name_empresa              String?   @db.VarChar(255)
+  total_precio              Int?
+  tlf_portab                String?   @db.VarChar(255)
+  emp_portab                String?   @db.VarChar(255)
+  purchaseNumber            String?   @db.VarChar(255)
+  active_cupon              String?   @db.VarChar(10)
+  transactionId             String?   @db.VarChar(255)
+  transaction_token         String?   @db.VarChar(255)
+  total_pagar               Int?
+  http_referer              String?   @db.VarChar(255)
+  utm_source                String?   @db.VarChar(255)
+  utm_campaign              String?   @db.VarChar(255)
+  utm_medium                String?   @db.VarChar(255)
+  utm_content               String?   @db.VarChar(255)
+  utm_term                  String?   @db.VarChar(255)
+  flg_cobertura             String?   @db.VarChar(255)
+  tipo_lead                 String?   @db.VarChar(255)
+  medio_pago                String?   @db.VarChar(255)
+  call_center               String?   @db.VarChar(255)
+  materialCode              String?   @db.VarChar(255)
+  campania                  String?   @db.VarChar(255)
+  tarjeta                   String?   @db.VarChar(255)
+  como_pago                 String?   @db.VarChar(255)
+  provincia_codigo          String?   @db.VarChar(255)
+  distrito_codigo           String?   @db.VarChar(255)
+  departamento_codigo       String?   @db.VarChar(255)
+  id_regla_encontrada       Int?
+  cola                      String?   @db.VarChar(255)
+  respuesta_ws              String?   @db.VarChar(255)
+  respuesta_vtex            String?   @db.VarChar(255)
+  venta_sin_llamada         String?   @db.VarChar(1)
+  tipo_orden                String?   @db.VarChar(255)
+  categorias                String?   @db.VarChar(255)
+  respuesta_eval_crediticia String?   @db.VarChar(255)
+  linea_response            String?   @db.VarChar(255)
+  cliente_response          String?   @db.VarChar(255)
+  crediticia_response       String?   @db.Text
+  marca_seller              String?   @db.VarChar(255)
+  createdAt                 DateTime  @db.DateTime(0)
+  updatedAt                 DateTime  @db.DateTime(0)
+
+  @@index([form_id], map: "idx_leads_01")
+  @@index([orden_id], map: "idx_leads_02")
+  @@index([tipo_linea], map: "idx_leads_03")
+  @@index([modalidad], map: "idx_leads_04")
+  @@index([tipo_despacho], map: "idx_leads_05")
+  @@index([departamento], map: "idx_leads_06")
+  @@index([provincia], map: "idx_leads_07")
+  @@index([distrito], map: "idx_leads_08")
+  @@index([nom_equipo], map: "idx_leads_09")
+}
+
+model leads_activities {
+  id                  Int       @id @default(autoincrement())
+  form_id             String?   @db.VarChar(255)
+  rebalance           Boolean?
+  order_form_id       String?   @db.VarChar(255)
+  id_documento        String?   @db.VarChar(200)
+  nombre_completo     String?   @db.VarChar(255)
+  nombre              String?   @db.VarChar(255)
+  ape_pat             String?   @db.VarChar(255)
+  ape_mat             String?   @db.VarChar(255)
+  tipo_doc            String?   @db.VarChar(255)
+  num_doc             String?   @db.VarChar(255)
+  num_tel_1           String?   @db.VarChar(255)
+  num_tel_2           String?   @db.VarChar(255)
+  fecha_orden         DateTime? @db.DateTime(0)
+  email               String?   @db.VarChar(255)
+  departamento        String?   @db.VarChar(255)
+  provincia           String?   @db.VarChar(255)
+  tipo_despacho       String?   @db.VarChar(255)
+  orden_id            String?   @db.VarChar(255)
+  tipo_linea          String?   @db.VarChar(255)
+  modalidad           String?   @db.VarChar(255)
+  distrito            String?   @db.VarChar(255)
+  nom_equipo          String?   @db.VarChar(255)
+  precio              String?   @db.VarChar(255)
+  cuota_inicial       String?   @db.VarChar(255)
+  list_price          String?   @db.VarChar(255)
+  precio_promocional  String?   @db.VarChar(255)
+  plan                String?   @db.VarChar(255)
+  precio_plan         Int?
+  financiamiento      String?   @db.VarChar(255)
+  familia             String?   @db.VarChar(255)
+  pi_id               String?   @db.VarChar(255)
+  tipo_prod           String?   @db.VarChar(255)
+  direccion           String?   @db.VarChar(255)
+  name_empresa        String?   @db.VarChar(255)
+  total_precio        Int?
+  tlf_portab          String?   @db.VarChar(255)
+  emp_portab          String?   @db.VarChar(255)
+  purchaseNumber      String?   @db.VarChar(255)
+  active_cupon        String?   @db.VarChar(10)
+  transactionId       String?   @db.VarChar(255)
+  transaction_token   String?   @db.VarChar(255)
+  total_pagar         Int?
+  http_referer        String?   @db.VarChar(255)
+  utm_source          String?   @db.VarChar(255)
+  utm_campaign        String?   @db.VarChar(255)
+  utm_medium          String?   @db.VarChar(255)
+  utm_content         String?   @db.VarChar(255)
+  utm_term            String?   @db.VarChar(255)
+  flg_cobertura       String?   @db.VarChar(255)
+  tipo_lead           String?   @db.VarChar(255)
+  subLead             String?   @db.VarChar(50)
+  medio_pago          String?   @db.VarChar(255)
+  call_center         String?   @db.VarChar(255)
+  materialCode        String?   @db.VarChar(255)
+  campania            String?   @db.VarChar(255)
+  tarjeta             String?   @db.VarChar(255)
+  como_pago           String?   @db.VarChar(255)
+  provincia_codigo    String?   @db.VarChar(255)
+  distrito_codigo     String?   @db.VarChar(255)
+  departamento_codigo String?   @db.VarChar(255)
+  api_intentos        Int?      @default(0)
+  tipo_orden          String?   @db.VarChar(255)
+  categorias          String?   @db.VarChar(255)
+  marca_seller        String?   @db.VarChar(255)
+  request_json        String?   @db.Text
+  createdAt           DateTime  @db.DateTime(0)
+  updatedAt           DateTime  @db.DateTime(0)
+}
+
+model reglas_call {
+  id          Int      @id @default(autoincrement())
+  nombre_call String   @db.VarChar(255)
+  c2c         String   @db.VarChar(255)
+  role_id     String   @db.VarChar(255)
+  createdAt   DateTime @db.DateTime(0)
+  updatedAt   DateTime @db.DateTime(0)
+}
+
+model reglas_pedido {
+  id                     Int      @id @default(autoincrement())
+  nombre_tipo_lead       String?  @db.VarChar(250)
+  nombre_tipo_producto   String   @db.VarChar(255)
+  nombre_modalidad       String   @db.VarChar(255)
+  nombre_plan            String   @db.VarChar(255)
+  nombre_financiamiento  String   @db.VarChar(255)
+  nombre_medio_pago      String   @db.VarChar(255)
+  nombre_tipo_venta      String   @db.VarChar(255)
+  nombre_tipo_linea      String   @db.VarChar(255)
+  venta_sin_llamada      String   @db.VarChar(1)
+  cantidad_calls         Int?
+  estado                 String?  @db.VarChar(1)
+  grupo                  Int?
+  type                   String?  @default("DEFAULT") @db.VarChar(255)
+  clientEvaluation       String?  @default("NO APLICA") @db.VarChar(20)
+  linearCreditEvaluation String?  @default("NO APLICA") @db.VarChar(20)
+  creditEvaluation       String?  @default("NO APLICA") @db.VarChar(20)
+  rentAdvanceRequired    String?  @default("NO APLICA") @db.VarChar(20)
+  initialFeePaidCustomer String?  @default("NO APLICA") @db.VarChar(20)
+  coverage               String?  @default("NO APLICA") @db.VarChar(20)
+  createdAt              DateTime @db.DateTime(0)
+  updatedAt              DateTime @db.DateTime(0)
+}
+
+model reglas_pedido_call {
+  id         Int      @id @default(autoincrement())
+  id_call    Int
+  id_pedido  Int
+  porcentaje Int
+  createdAt  DateTime @db.DateTime(0)
+  updatedAt  DateTime @db.DateTime(0)
+}
+
+model reglas_pedido_eliminado {
+  id                    Int      @id
+  nombre_tipo_producto  String   @db.VarChar(255)
+  nombre_modalidad      String   @db.VarChar(255)
+  nombre_plan           String   @db.VarChar(255)
+  nombre_financiamiento String   @db.VarChar(255)
+  nombre_medio_pago     String   @db.VarChar(255)
+  nombre_tipo_venta     String   @db.VarChar(255)
+  nombre_tipo_linea     String   @db.VarChar(255)
+  venta_sin_llamada     String   @db.VarChar(1)
+  cantidad_calls        Int?
+  estado                String?  @db.VarChar(1)
+  createdAt             DateTime @db.DateTime(0)
+  updatedAt             DateTime @db.DateTime(0)
+}
+
+model report_order {
+  id                             Int                    @id @default(autoincrement())
+  nro_pedido                     String?                @unique(map: "REPORT") @db.VarChar(255)
+  order_form_id                  String?                @db.Text
+  pre_orden_venta_regular_web    String?                @db.VarChar(50)
+  product_id                     String?                @db.Text
+  fecha_pedido                   String?                @db.VarChar(255)
+  fecha_prometida                String?                @db.VarChar(255)
+  fecha_prometida_final          String?                @db.Text
+  estado_pedido                  String?                @db.VarChar(255)
+  motivo                         String?                @db.Text
+  submotivo                      String?                @db.Text
+  tipo_servicio                  String?                @db.Text
+  tipo_lead                      String?                @db.VarChar(255)
+  forma_Pago                     String?                @db.VarChar(255)
+  modalidad                      String?                @db.VarChar(255)
+  descripcion_equipo             String?                @db.Text
+  nombre_equipo                  String?                @db.Text
+  plan                           String?                @db.Text
+  nombre_cliente                 String?                @db.Text
+  tipo_doc                       String?                @db.VarChar(255)
+  documento                      String?                @db.VarChar(255)
+  telefono                       String?                @db.VarChar(255)
+  nro_pedido_original            String?                @db.VarChar(255)
+  fecha_pedido_original          String?                @db.Text
+  tipo_servicio_original         String?                @db.Text
+  tipo_lead_original             String?                @db.VarChar(255)
+  forma_pago_original            String?                @db.VarChar(255)
+  modalidad_original             String?                @db.VarChar(255)
+  descripcion_equipo_original    String?                @db.Text
+  nombre_equipo_original         String?                @db.VarChar(255)
+  plan_original                  String?                @db.VarChar(255)
+  departamento                   String?                @db.VarChar(255)
+  provincia                      String?                @db.VarChar(255)
+  distrito                       String?                @db.VarChar(255)
+  campana                        String?                @db.VarChar(255)
+  campaignName                   String?                @db.Text
+  direccion_despacho             String?                @db.Text
+  direccion_recojo_tienda        String?                @db.Text
+  delivery_precio                String?                @db.VarChar(255)
+  interior                       String?                @db.VarChar(255)
+  referencia                     String?                @db.VarChar(255)
+  bambulytics                    String?                @db.VarChar(255)
+  primer_user                    String?                @db.VarChar(100)
+  ultimo_asesor                  String?                @db.VarChar(255)
+  user_ultimo_cambio_estado_vtex String?                @db.VarChar(255)
+  user_ultimo_cambio_estado_isat String?                @db.VarChar(255)
+  fecha_estado                   String?                @db.VarChar(255)
+  fecha_estado_vtex              String?                @db.VarChar(255)
+  fecha_estado_actual            String?                @db.VarChar(255)
+  estado_pedido_actual           String?                @db.VarChar(255)
+  submotivo_actual               String?                @db.VarChar(255)
+  motivo_actual                  String?                @db.VarChar(255)
+  financiamiento                 String?                @db.VarChar(255)
+  montototal                     String?                @db.VarChar(255)
+  precio_promocional             String?                @db.VarChar(255)
+  precio_contraentrega           String?                @db.Text
+  cuota_inicial                  String?                @db.VarChar(255)
+  comision                       String?                @db.Text
+  marca_seller                   String?                @db.VarChar(255)
+  tipo_linea                     String?                @db.VarChar(255)
+  familia                        String?                @db.VarChar(255)
+  nombre_familia                 String?                @db.VarChar(255)
+  numero_de_linea                String?                @db.VarChar(255)
+  celular_a_renovar              String?                @db.Text
+  numero_a_portar                String?                @db.VarChar(255)
+  numero_a_portar_modif          String?                @db.Text
+  call                           String?                @db.VarChar(255)
+  c2c                            String?                @db.Char(2)
+  estado_extorno                 String?                @db.VarChar(255)
+  monto_extorno                  String?                @db.VarChar(255)
+  Cod_Form                       String?                @db.VarChar(255)
+  formulario                     String?                @db.VarChar(255)
+  campana_lead                   String?                @db.VarChar(255)
+  bambulytics_original           String?                @db.VarChar(255)
+  email                          String?                @db.VarChar(255)
+  marca                          String?                @db.VarChar(255)
+  SKU                            String?                @db.VarChar(255)
+  id_Plano                       String?                @db.VarChar(255)
+  coordenada_x                   String?                @db.VarChar(255)
+  coordenada_y                   String?                @db.VarChar(255)
+  nro_pedido_sisact              String?                @db.VarChar(255)
+  turno                          String?                @db.VarChar(255)
+  franja_horaria                 String?                @db.VarChar(255)
+  fecha_activacion               String?                @db.Text
+  tipo_delivery                  String?                @db.VarChar(255)
+  fecha_inicio_delivery          String?                @db.Text
+  fecha_fin_delivery             String?                @db.Text
+  estimado_envio                 String?                @db.Text
+  fecha_estimado_envio           String?                @db.Text
+  pi_id                          String?                @db.VarChar(255)
+  http_referer                   String?                @db.VarChar(255)
+  utm_source                     String?                @db.VarChar(255)
+  utm_campaign                   String?                @db.VarChar(255)
+  utm_medium                     String?                @db.VarChar(255)
+  utm_content                    String?                @db.VarChar(255)
+  utm_term                       String?                @db.VarChar(255)
+  exclusivo_pago_online          String?                @db.VarChar(255)
+  operador_cedente               String?                @db.VarChar(255)
+  origen_portabilidad            String?                @db.VarChar(255)
+  SOT                            String?                @db.VarChar(255)
+  canal                          String?                @db.Text
+  in_out                         String?                @db.Text
+  nro_sec                        String?                @db.Text
+  document_id                    String?                @db.Text
+  categories_ids                 String?                @db.Text
+  validacion_l_nea               String?                @map("validacion_línea") @db.Text
+  validacion_cliente             String?                @db.Text
+  evaluacion_crediticia          String?                @db.Text
+  idcita_agendada                String?                @default("") @db.VarChar(255)
+  social_selling                 String?                @db.Text
+  estado_pago                    String?                @db.Text
+  items                          Int?
+  origin                         String?                @db.VarChar(255)
+  statusDescription              String?                @db.VarChar(255)
+  invoice_number                 String?                @db.Text
+  transaction_id                 String?                @db.Text
+  flujo_ventas                   String?                @db.Text
+  numero_asignado                String?                @db.Text
+  nro_pedido_prepago             String?                @db.Text
+  estado_liquidacion             String?                @db.Text
+  claro_puntos                   String?                @db.VarChar(255)
+  renta_adelantada               String?                @db.VarChar(255)
+  nombre_campana_final           String?                @db.VarChar(255)
+  direccion_facturacion          String?                @db.VarChar(255)
+  estado_vtex                    String?                @db.VarChar(255)
+  boleta_asociada                String?                @db.VarChar(255)
+  descripcion_material_sisact    String?                @db.Text
+  imei                           String?                @db.VarChar(255)
+  submotivo_actual_user          String?                @db.VarChar(255)
+  motivo_actual_user             String?                @db.VarChar(255)
+  estado_pedido_actual_user      String?                @db.VarChar(50)
+  fecha_estado_actual_user       String?                @db.VarChar(50)
+  ultimo_user                    String?                @db.VarChar(100)
+  mercado_pago_cip               String?                @db.VarChar(50)
+  numero_contacto_adicional      String?                @db.VarChar(50)
+  check_promociones              String?                @db.Char(1)
+  check_terminos                 String?                @db.Char(1)
+  ultimo_user_rol                String?                @db.Text
+  primer_user_rol                String?                @db.Text
+  nro_pedido_nintex              String?                @db.Text
+  tipo                           String?                @db.Char(5)
+  createdAt                      DateTime               @default(now()) @db.DateTime(0)
+  updatedAt                      DateTime               @default(now()) @db.DateTime(0)
+  report_order_details           report_order_details[]
+
+  @@index([c2c], map: "idx_c2c")
+  @@index([fecha_pedido], map: "idx_fecha_pedido")
+}
+
+model report_order_adicionales {
+  id                          Int      @id @default(autoincrement())
+  unique_id                   String?  @db.Text
+  material_code               String?  @db.Text
+  order_id                    String?  @db.Text
+  tipo_material               String?  @db.Text
+  product_descripcion         String?  @db.Text
+  nro_serie                   String?  @db.Text
+  monto                       String?  @db.Text
+  indic_esp                   String?  @db.Text
+  biometria                   String?  @db.Text
+  nro_asignado                String?  @db.Text
+  plan                        String?  @db.Text
+  product_id                  String?  @db.Text
+  product_name                String?  @db.Text
+  marca                       String?  @db.VarChar(255)
+  descripcion_material_sisact String?  @db.VarChar(255)
+  vacio                       String?  @db.Text
+  nulo                        String?  @db.Text
+  pre_orden_venta_regular_web String?  @db.Text
+  createdAt                   DateTime @default(now()) @db.DateTime(0)
+  updatedAt                   DateTime @default(now()) @db.DateTime(0)
+}
+
+model report_order_details {
+  id                        Int           @id @default(autoincrement())
+  id_report_order           Int?
+  commission                Decimal?      @db.Decimal(10, 0)
+  nro_pedido_sisact_dos     String?       @db.VarChar(20)
+  nro_pedido_sisact_tres    String?       @db.VarChar(20)
+  franja_horaria_vtex       String?       @db.VarChar(30)
+  identificador_landing     String?       @db.VarChar(50)
+  cobertura                 String?       @db.VarChar(15)
+  evaluacionCrediticia      String?       @db.VarChar(100)
+  evaluacionCliente         String?       @db.VarChar(100)
+  evaluacionLinea           String?       @db.VarChar(100)
+  evaluacionRentaAdelantada String?       @db.VarChar(100)
+  evaluacionCuotaInical     String?       @db.VarChar(100)
+  reglaAsignadaId           Int?
+  billingReference          String?       @db.Text
+  billingAddress            String?       @db.Text
+  billingDistrict           String?       @db.VarChar(50)
+  billingprovince           String?       @db.VarChar(50)
+  billingDepartment         String?       @db.VarChar(50)
+  createdAt                 DateTime      @default(now()) @db.DateTime(0)
+  updatedAt                 DateTime      @default(now()) @db.DateTime(0)
+  report_order              report_order? @relation(fields: [id_report_order], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "report_order_details_ibfk_1")
+
+  @@index([id_report_order], map: "id_report_order")
+}
+
+model report_order_pagos {
+  id                   Int      @id @default(autoincrement())
+  orden_id             String?  @db.VarChar(50)
+  cip                  String?  @db.Text
+  fecha_pedido         String?  @db.Text
+  fecha_expiracion     String?  @db.Text
+  orden_estado         String?  @db.Text
+  fecha_cambio_estado  String?  @db.Text
+  tipo_reg             String?  @db.Text
+  nro_tarjeta          String?  @db.Text
+  primeros_digitos     String?  @db.Text
+  ultimos_digitos      String?  @db.Text
+  medio_pago           String?  @db.Text
+  monto                String?  @db.Text
+  fecha_last_change    String?  @db.Text
+  fecha_current_change String?  @db.Text
+  fecha_available      String?  @db.Text
+  fecha_transaccion    String?  @db.Text
+  tid                  String?  @db.Text
+  authorization_code   String?  @db.Text
+  cod_cupon            String?  @db.Text
+  logica_descuento     String?  @db.Text
+  transaction_id       String?  @db.Text
+  createdAt            DateTime @default(now()) @db.DateTime(0)
+  updatedAt            DateTime @default(now()) @db.DateTime(0)
+
+  @@index([orden_id], map: "idx_order_id")
+}
+
+model users {
+  id        Int      @id @default(autoincrement())
+  firstname String   @db.VarChar(255)
+  lastname  String   @db.VarChar(255)
+  email     String   @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  status    String   @db.VarChar(255)
+  is_admin  String   @db.VarChar(255)
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
