@@ -1,6 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient as PrismaClient1 } from "@prisma-db-1/client";
+import { PrismaClient as PrismaClient2 } from "@prisma-db-2/client";
 
-const prisma = new PrismaClient({
+const prisma = new PrismaClient1({
+  log: ["query", "info", "warn", "error"],
+});
+
+const prisma2 = new PrismaClient2({
   log: ["query", "info", "warn", "error"],
 });
 
@@ -13,6 +18,8 @@ async function main() {
       c2c: "WWEEEEEEES",
       nombre_call: "WHATT",
       role_id: "264564",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     update: {
       c2c: "WWWWWWE",
@@ -21,6 +28,9 @@ async function main() {
 
   console.log("results2: ", results2);
 
+  const list2 = await prisma2.loghookexternalstores.findMany();
+
+  console.log(list2);
   return;
 
   const user = await prisma.reglasCall.create({
@@ -28,6 +38,8 @@ async function main() {
       c2c: "W",
       nombre_call: "WHAT",
       role_id: "264564",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   });
 

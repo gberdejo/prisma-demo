@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../../node_modules/@prisma-db-1/client"
 }
 
 datasource db {
@@ -193,12 +194,12 @@ model leads_activities {
 }
 
 model ReglasCall {
-  id          Int       @id @default(autoincrement())
-  nombre_call String    @db.VarChar(255)
-  c2c         String    @db.VarChar(255)
-  role_id     String    @db.VarChar(255)
-  createdAt   DateTime? @default(now()) @db.DateTime(0)
-  updatedAt   DateTime? @default(now()) @db.DateTime(0)
+  id          Int      @id @default(autoincrement())
+  nombre_call String   @db.VarChar(255)
+  c2c         String   @db.VarChar(255)
+  role_id     String   @db.VarChar(255)
+  createdAt   DateTime @db.DateTime(0)
+  updatedAt   DateTime @db.DateTime(0)
 
   @@map("reglas_call")
 }

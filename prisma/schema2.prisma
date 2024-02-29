@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../node_modules/@prisma-db-2/client"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL2")
+}
+
+type LoghookexternalstoresOrigin {
+  account String
+  key     String
+}
+
+model loghookexternalstores {
+  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
+  v             Int                         @map("__v")
+  createdAt     DateTime                    @db.Date
+  currentChange DateTime                    @db.Date
+  domain        String
+  lastChange    DateTime                    @db.Date
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  lastState     Json?
+  orderId       String
+  origin        LoghookexternalstoresOrigin
+  state         String
+  updatedAt     DateTime                    @db.Date
+}
